@@ -1,47 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>STANDOFF 2 - FPS POV</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600&display=swap');
-        
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Rajdhani', sans-serif; cursor: none; }
-
-        /* OYUN ALANI VE MAP */
-        #game-map { 
-            width: 100%; height: 100%; 
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://i.imgur.com/vHqJv7P.jpg'); /* Dust 2 High Res */
-            background-size: cover; background-position: center; display: none; position: relative;
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
+        #viewport { width: 100%; height: 100%; background: url('https://wallpapercave.com/wp/wp6889758.jpg') center/cover; position: relative; }
+        #vignette { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.7) 100%); pointer-events: none; z-index: 5; }
+        #gun { position: fixed; bottom: -60px; right: -40px; width: 650px; z-index: 10; transform: rotate(-5deg); transition: 0.05s; pointer-events: none; }
+        #crosshair { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; border: 2px solid #0f0; border-radius: 50%; z-index: 20; pointer-events: none; }
+        .hud { position: absolute; bottom: 20px; color: white; font-family: sans-serif; font-weight: bold; font-size: 30px; z-index: 30; text-shadow: 2px 2px #000; }
+    </style>
+</head>
+<body onclick="fire()">
+    <div id="vignette"></div>
+    <div id="viewport">
+        <div style="left: 30px;" class="hud">+ 100</div>
+        <div style="right: 40px;" class="hud">30 / 90</div>
+        <div id="crosshair"></div>
+        <img id="gun" src="https://www.pngmart.com/files/13/Assault-Rifle-PNG-Transparent-Image.png">
+    </div>
+    <script>
+        function fire() {
+            const gun = document.getElementById('gun');
+            gun.style.transform = 'translateY(-20px) rotate(-7deg) scale(1.1)';
+            setTimeout(() => { gun.style.transform = 'rotate(-5deg)'; }, 60);
         }
-
-        /* SİLAH (VIEWMODEL) */
-        #weapon {
-            position: fixed; bottom: -20px; right: 10%; width: 500px; height: 400px;
-            background: url('https://i.imgur.com/6S6q7Fp.png'); /* AK-47 veya M4 tarzı şeffaf silah */
-            background-size: contain; background-repeat: no-repeat; z-index: 100; pointer-events: none;
-            transition: transform 0.05s;
-        }
-
-        /* NİŞANGAH (CROSSHAIR) */
-        #crosshair {
-            position: fixed; width: 20px; height: 20px; border: 2px solid #00ff00;
-            border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            z-index: 1000; pointer-events: none;
-        }
-        #crosshair::before { content: ''; position: absolute; top: 50%; left: 50%; width: 2px; height: 2px; background: #0f0; transform: translate(-50%, -50%); }
-
-        /* DÜŞMAN (DİNAMİK ASKER) */
-        .enemy {
-            position: absolute; width: 150px; height: 250px;
-            background: url('https://i.imgur.com/S6m6m8W.png'); /* CT Soldier */
-            background-size: contain; background-repeat: no-repeat;
-            filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); z-index: 10;
-        }
-
-        /* KILL LOG (ÖLDÜRME BİLGİSİ) */
-        #kill-log {
-            position: absolute; top: 20px; right: 20px; color: #fff;
-            text-align: right; font-size: 18px; z-index: 200;
-        }
-        .kill-msg { background: rgba(255, 69, 0, 0.7); padding: 5px 15px; margin-bottom: 5px; border-left: 4px solid #fff; animation: fadeOut 2s forwards; }
-
-        @keyframes fadeOut { 0% { opacity
+    </script>
+</body>
+</html>
