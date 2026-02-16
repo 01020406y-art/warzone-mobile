@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600&display=swap');
+        
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Rajdhani', sans-serif; cursor: none; }
+
+        /* OYUN ALANI VE MAP */
+        #game-map { 
+            width: 100%; height: 100%; 
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://i.imgur.com/vHqJv7P.jpg'); /* Dust 2 High Res */
+            background-size: cover; background-position: center; display: none; position: relative;
+        }
+
+        /* SİLAH (VIEWMODEL) */
+        #weapon {
+            position: fixed; bottom: -20px; right: 10%; width: 500px; height: 400px;
+            background: url('https://i.imgur.com/6S6q7Fp.png'); /* AK-47 veya M4 tarzı şeffaf silah */
+            background-size: contain; background-repeat: no-repeat; z-index: 100; pointer-events: none;
+            transition: transform 0.05s;
+        }
+
+        /* NİŞANGAH (CROSSHAIR) */
+        #crosshair {
+            position: fixed; width: 20px; height: 20px; border: 2px solid #00ff00;
+            border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 1000; pointer-events: none;
+        }
+        #crosshair::before { content: ''; position: absolute; top: 50%; left: 50%; width: 2px; height: 2px; background: #0f0; transform: translate(-50%, -50%); }
+
+        /* DÜŞMAN (DİNAMİK ASKER) */
+        .enemy {
+            position: absolute; width: 150px; height: 250px;
+            background: url('https://i.imgur.com/S6m6m8W.png'); /* CT Soldier */
+            background-size: contain; background-repeat: no-repeat;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); z-index: 10;
+        }
+
+        /* KILL LOG (ÖLDÜRME BİLGİSİ) */
+        #kill-log {
+            position: absolute; top: 20px; right: 20px; color: #fff;
+            text-align: right; font-size: 18px; z-index: 200;
+        }
+        .kill-msg { background: rgba(255, 69, 0, 0.7); padding: 5px 15px; margin-bottom: 5px; border-left: 4px solid #fff; animation: fadeOut 2s forwards; }
+
+        @keyframes fadeOut { 0% { opacity
